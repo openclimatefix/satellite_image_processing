@@ -1,0 +1,20 @@
+name: sat_image_processing
+channels:
+  - conda-forge
+dependencies:
+  - python>=3.7
+  - pytest
+  - pytables
+  - pandas
+  - matplotlib
+  - jupyterlab
+  - ipympl
+  - nodejs
+  - satpy
+  - netCDF4
+  - xarray
+  - cartopy
+  - pyproj
+  - geopandas
+  - rasterio
+  - pillow  # for image loading and processing
