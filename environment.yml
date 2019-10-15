@@ -18,3 +18,4 @@ dependencies:
   - geopandas
   - rasterio
   - pillow  # for image loading and processing
+  - gdal
