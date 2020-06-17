@@ -97,13 +97,10 @@ def empty_local_zarr(local_zarr_path, variables):
     for v in variables:
         os.system(f'rm {local_zarr_path}/{v}/[0-9]*')
     
-# filter dates to process
-early2019 = lambda x: x[0]==2019 and x[1]<7
-netcdf_dates = list(filter(early2019, netcdf_dates))
     
 create_new = True
 # loop through all files and convert and upload as zarr
-for year, month, day in netcdf_dates[:10]:
+for year, month, day in netcdf_dates:
     netcdf_to_zarr(year, month, day, create_new=create_new)
     create_new = False
     
