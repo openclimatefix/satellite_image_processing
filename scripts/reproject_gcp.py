@@ -392,10 +392,14 @@ for year in range(args.startyear, args.endyear+1):
                 for minute in sorted([int(f[-2:]) for f in glob.glob(f"{downl_path}/{hour:02}/*")]):
                     dt = datetime(year=year, month=month, day=day, hour=hour, minute=minute)
                     print(dt)
-
-                    ds = get_reprojected_image(os.path.join(STAGING_PATH, 'download'), 
-                                                   dt, columns=reproject_channels, 
-                                                   apply_hand_tunig=True)
+                    
+                    try:
+                        ds = get_reprojected_image(os.path.join(STAGING_PATH, 'download'), 
+                                                       dt, columns=reproject_channels, 
+                                                       apply_hand_tunig=True)
+                    except subprocess.CalledProcessError as e:
+                        print('`subprocess` error.\n', e, '\nskipping this file.\n')
+                        continue
                     
                     if ds_list and (
                         (ds.time+one_min).dt.hour.values[0]!=
